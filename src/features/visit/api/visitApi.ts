@@ -1,8 +1,8 @@
 import { api } from "../../../lib/api";
-import { DEFAULT_PAGE_REQUEST, type PageResponse } from "../../../lib/apiTypes";
+import { DEFAULT_PAGE_REQUEST, type PageRequest, type PageResponse } from "../../../lib/apiTypes";
 import type { CompleteVisitRequest, RescheduleVisitRequest, VisitRequest, VisitResponse, VisitSearchRequest } from "../types/visit";
 
-export async function getVisits(params = DEFAULT_PAGE_REQUEST): Promise<PageResponse<VisitResponse>> {
+export async function getVisits(params: PageRequest = DEFAULT_PAGE_REQUEST): Promise<PageResponse<VisitResponse>> {
     const response = await api.get<PageResponse<VisitResponse>>("/visits/page", { params });
     return response.data;
 }

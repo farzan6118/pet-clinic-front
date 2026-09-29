@@ -1,8 +1,8 @@
 import { api } from "../../../lib/api";
-import { DEFAULT_PAGE_REQUEST, type PageResponse, type UuidAndTitle } from "../../../lib/apiTypes";
+import { DEFAULT_PAGE_REQUEST, type PageRequest, type PageResponse, type UuidAndTitle } from "../../../lib/apiTypes";
 import type { RoomRequest, RoomResponse } from "../types/clinic";
 
-export async function getRooms(params = DEFAULT_PAGE_REQUEST): Promise<PageResponse<RoomResponse>> {
+export async function getRooms(params: PageRequest = DEFAULT_PAGE_REQUEST): Promise<PageResponse<RoomResponse>> {
     const response = await api.get<PageResponse<RoomResponse>>("/rooms/page", { params });
     return response.data;
 }

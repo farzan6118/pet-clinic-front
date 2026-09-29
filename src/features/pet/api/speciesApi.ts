@@ -1,9 +1,9 @@
 import { api } from "../../../lib/api";
-import { DEFAULT_PAGE_REQUEST, type PageResponse, type UuidAndTitle } from "../../../lib/apiTypes";
+import { DEFAULT_PAGE_REQUEST, type PageRequest, type PageResponse, type UuidAndTitle } from "../../../lib/apiTypes";
 import type { SpeciesRequest, SpeciesResponse } from "../types/pet";
 
 export async function getSpeciesPage(
-    params = DEFAULT_PAGE_REQUEST,
+    params: PageRequest = DEFAULT_PAGE_REQUEST,
 ): Promise<PageResponse<SpeciesResponse>> {
     const response = await api.get<PageResponse<SpeciesResponse>>("/species/page", { params });
     return response.data;

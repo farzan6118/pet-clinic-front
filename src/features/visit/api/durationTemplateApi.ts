@@ -1,8 +1,8 @@
 import { api } from "../../../lib/api";
-import { DEFAULT_PAGE_REQUEST, type PageResponse, type UuidAndTitle } from "../../../lib/apiTypes";
+import { DEFAULT_PAGE_REQUEST, type PageRequest, type PageResponse, type UuidAndTitle } from "../../../lib/apiTypes";
 import type { DurationTemplateRequest, DurationTemplateResponse } from "../types/visit";
 
-export async function getDurationTemplates(params = DEFAULT_PAGE_REQUEST): Promise<PageResponse<DurationTemplateResponse>> {
+export async function getDurationTemplates(params: PageRequest = DEFAULT_PAGE_REQUEST): Promise<PageResponse<DurationTemplateResponse>> {
     const response = await api.get<PageResponse<DurationTemplateResponse>>("/duration-templates/page", { params });
     return response.data;
 }

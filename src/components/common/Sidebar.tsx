@@ -1,12 +1,13 @@
-import {
-    Dashboard,
-    Pets,
-    People,
-    MedicalServices,
-    Business,
-    Event,
-    AccessTime,
-} from "@mui/icons-material";
+import Dashboard from "@mui/icons-material/Dashboard";
+import Pets from "@mui/icons-material/Pets";
+import People from "@mui/icons-material/People";
+import MedicalServices from "@mui/icons-material/MedicalServices";
+import Business from "@mui/icons-material/Business";
+import Event from "@mui/icons-material/Event";
+import AccessTime from "@mui/icons-material/AccessTime";
+import Category from "@mui/icons-material/Category";
+import MeetingRoom from "@mui/icons-material/MeetingRoom";
+import Schedule from "@mui/icons-material/Schedule";
 
 import {
     Drawer,
@@ -40,6 +41,11 @@ const menuItems = [
         icon: <Pets />,
     },
     {
+        label: "Species",
+        path: "/species",
+        icon: <Category />,
+    },
+    {
         label: "Vets",
         path: "/vets",
         icon: <MedicalServices />,
@@ -50,6 +56,16 @@ const menuItems = [
         icon: <Business />,
     },
     {
+        label: "Rooms",
+        path: "/rooms",
+        icon: <MeetingRoom />,
+    },
+    {
+        label: "Room types",
+        path: "/room-types",
+        icon: <Category />,
+    },
+    {
         label: "Visits",
         path: "/visits",
         icon: <Event />,
@@ -58,6 +74,16 @@ const menuItems = [
         label: "Availability",
         path: "/availability",
         icon: <AccessTime />,
+    },
+    {
+        label: "Medical records",
+        path: "/medical-records",
+        icon: <MedicalServices />,
+    },
+    {
+        label: "Duration templates",
+        path: "/duration-templates",
+        icon: <Schedule />,
     },
 ];
 
@@ -87,6 +113,13 @@ export function Sidebar() {
                             key={item.path}
                             component={NavLink}
                             to={item.path}
+                            sx={{
+                                "&.active": {
+                                    bgcolor: "action.selected",
+                                    color: "primary.main",
+                                    "& .MuiListItemIcon-root": { color: "primary.main" },
+                                },
+                            }}
                         >
                             <ListItemIcon>
                                 {item.icon}

@@ -1,10 +1,10 @@
 import { api } from "../../../lib/api";
-import { DEFAULT_PAGE_REQUEST, type PageResponse } from "../../../lib/apiTypes";
+import { DEFAULT_PAGE_REQUEST, type PageRequest, type PageResponse } from "../../../lib/apiTypes";
 import type { VetAvailabilityRequest, VetAvailabilityResponse } from "../types/vet";
 
 export async function getVetAvailabilities(
     vetUuid: string,
-    params = DEFAULT_PAGE_REQUEST,
+    params: PageRequest = DEFAULT_PAGE_REQUEST,
 ): Promise<PageResponse<VetAvailabilityResponse>> {
     const response = await api.get<PageResponse<VetAvailabilityResponse>>(
         `/vets/${vetUuid}/availabilities/page`, { params },
