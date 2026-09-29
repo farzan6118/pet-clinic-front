@@ -1,6 +1,2 @@
-import { api } from "../../../lib/api";
-
-export async function getOwners() {
-    const response = await api.get("/owners/page");
-    return response.data;
-}
+// Keep the existing import path working while the list page is implemented.
+export { getOwners } from "../api/ownerApi";
