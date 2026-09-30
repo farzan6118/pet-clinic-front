@@ -42,7 +42,7 @@ Available scripts in `package.json`:
 - `src/components/common/Sidebar.tsx` — navigation items for Dashboard, Owners, Pets, Vets, Clinics, Visits, and Availability.
 - `src/features/dashboard/pages/DashboardPage.tsx` — currently a simple Dashboard heading.
 - `src/features/owner/` — initial owner feature scaffold: API helper, owner request types, and page/component files. `OwnerCreatePage.tsx`, `OwnerEditPage.tsx`, `OwnerForm.tsx`, and `OwnerTable.tsx` are currently empty. `pages/OwnerListPage.tsx` currently contains only `getOwners()`, which requests `GET /owners/page`; consider moving this API helper into `api/ownerApi.ts` as the feature develops.
-- `src/lib/api.ts` — Axios instance with JSON headers and `baseURL` set to `http://localhost:8080/api`.
+- `src/lib/api.ts` — Axios instance with JSON headers and an environment-configurable `VITE_API_BASE_URL` (defaults to same-origin `/api`).
 - `src/index.css` — minimal page/root margin and height reset.
 - `public/` — static favicon and icon SVG assets.
 
@@ -52,7 +52,7 @@ Only `/` and `/dashboard` are registered. The other sidebar links do not yet hav
 
 ## API and owner data
 
-The Axios client assumes a backend reachable at `http://localhost:8080/api`. Owner creation posts an `OwnerCreateRequest` to `/owners`; listing requests `/owners/page`. These endpoints and the payload contract are assumptions in the current frontend and should be matched against the backend before integration.
+The Axios client defaults to `/api`; Vite proxies that prefix to `http://localhost:8010`, matching the Spring Boot backend's default port. Set `VITE_API_PROXY_TARGET` to change the development proxy target. For direct deployed API calls, set `VITE_API_BASE_URL` to the API `/api` URL and configure CORS on the backend. Owner creation posts an `OwnerCreateRequest` to `/owners`; listing requests `/owners/page`, matching the backend controller routes.
 
 Owner request types are in `src/features/owner/types/owner.ts`:
 
