@@ -29,6 +29,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import type { ReactNode } from "react";
 import { type FormValues, type ResourceField, type SelectOption } from "../../lib/resourceForms";
+import { DateTimePickerField } from "./DateTimePickerField";
 
 export interface ResourceRow { uuid: string }
 export interface ResourceColumn<T> { label: string; render: (row: T) => ReactNode }
@@ -45,6 +46,8 @@ export interface ResourceConfig<T extends ResourceRow> {
     toForm?: (row: T) => FormValues;
     canEdit?: boolean;
     canDelete?: boolean;
+    canCreate?: boolean;
+    createAction?: ReactNode;
     extraActions?: (row: T, refresh: () => void) => ReactNode;
 }
 
@@ -69,14 +72,17 @@ function ResourceInput({ field, value, onChange }: {
             </TextField>
         );
     }
+    if (field.type === "date" || field.type === "time" || field.type === "datetime-local") {
+        return <DateTimePickerField label={field.label} mode={field.type} required={field.required}
+            value={String(value)} onChange={onChange} />;
+    }
     if (typeof value === "boolean") {
         return <FormControlLabel control={<Checkbox checked={value} onChange={(event) => onChange(event.target.checked)} />} label={field.label} />;
     }
     return (
         <TextField fullWidth label={field.label} type={field.type ?? "text"} required={field.required}
             value={value} onChange={(event) => onChange(event.target.value)}
-            slotProps={field.type === "date" || field.type === "time" || field.type === "datetime-local"
-                ? { inputLabel: { shrink: true } } : undefined} />
+        />
     );
 }
 
@@ -138,7 +144,8 @@ export function ResourcePage<T extends ResourceRow>({ config }: { config: Resour
         <Stack spacing={2}>
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <Typography variant="h4">{config.title}</Typography>
-                <Button variant="contained" startIcon={<Add />} onClick={openCreate}>Add {config.title.replace(/s$/, "")}</Button>
+                {config.createAction ?? (config.canCreate === false ? null :
+                    <Button variant="contained" startIcon={<Add />} onClick={openCreate}>Add {config.title.replace(/s$/, "")}</Button>)}
             </Box>
             {query.isError && <Alert severity="error">{query.error.message}</Alert>}
             {error && !dialogOpen && <Alert severity="error">{error}</Alert>}

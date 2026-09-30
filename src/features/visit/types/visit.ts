@@ -50,6 +50,22 @@ export interface VisitResponse {
     status: VisitStatus;
 }
 
+export interface AvailableVisitSlotResponse {
+    visitDateFrom: string;
+    visitDateTo: string;
+    roomUuid: string | null;
+}
+
+export interface AvailableVisitSlotsRangeRequest {
+    vetUuid: string;
+    petUuid: string;
+    dateFrom: string;
+    dateTo: string;
+    visitType: VisitType;
+    durationMinutes: number;
+    intervalMinutes?: number;
+}
+
 export interface VisitSearchRequest extends PageRequest {
     visitDateFrom?: string;
     visitDateTo?: string;

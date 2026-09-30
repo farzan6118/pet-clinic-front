@@ -1,6 +1,6 @@
 import { api } from "../../../lib/api";
 import { DEFAULT_PAGE_REQUEST, type PageRequest, type PageResponse } from "../../../lib/apiTypes";
-import type { CompleteVisitRequest, RescheduleVisitRequest, VisitRequest, VisitResponse, VisitSearchRequest } from "../types/visit";
+import type { AvailableVisitSlotResponse, AvailableVisitSlotsRangeRequest, CompleteVisitRequest, RescheduleVisitRequest, VisitRequest, VisitResponse, VisitSearchRequest } from "../types/visit";
 
 export async function getVisits(params: PageRequest = DEFAULT_PAGE_REQUEST): Promise<PageResponse<VisitResponse>> {
     const response = await api.get<PageResponse<VisitResponse>>("/visits/page", { params });
@@ -9,6 +9,13 @@ export async function getVisits(params: PageRequest = DEFAULT_PAGE_REQUEST): Pro
 
 export async function searchVisits(params: VisitSearchRequest): Promise<PageResponse<VisitResponse>> {
     const response = await api.get<PageResponse<VisitResponse>>("/visits/search", { params });
+    return response.data;
+}
+
+export async function getAvailableVisitSlots(
+    params: AvailableVisitSlotsRangeRequest,
+): Promise<AvailableVisitSlotResponse[]> {
+    const response = await api.get<AvailableVisitSlotResponse[]>("/visits/available-slots/range", { params });
     return response.data;
 }
 

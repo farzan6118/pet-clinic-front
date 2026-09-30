@@ -7,6 +7,7 @@ import { getVetOptions } from "../api/vetApi";
 import { createVetAvailability, deleteVetAvailability, getAvailabilitiesByDate, getVetAvailabilities, updateVetAvailability } from "../api/availabilityApi";
 import type { VetAvailabilityRequest, VetAvailabilityResponse } from "../types/vet";
 import { useQuery } from "@tanstack/react-query";
+import { DateTimePickerField } from "../../../components/common/DateTimePickerField";
 
 const fields: ResourceField[] = [
     { name: "startTime", label: "Starts at", type: "datetime-local", required: true },
@@ -26,7 +27,7 @@ export function AvailabilityPage() {
                 <TextField select label="Vet for schedule management" value={vetUuid} onChange={(event) => setVetUuid(event.target.value)} sx={{ minWidth: 280 }}>
                     {vets.data?.map((vet) => <MenuItem key={vet.uuid} value={vet.uuid}>{vet.title}</MenuItem>)}
                 </TextField>
-                <TextField type="date" label="Find availability by date" value={date} onChange={(event) => setDate(event.target.value)} slotProps={{ inputLabel: { shrink: true } }} />
+                <DateTimePickerField label="Find availability by date" mode="date" value={date} onChange={setDate} />
             </Stack>
         </Paper>
         {date && <>
