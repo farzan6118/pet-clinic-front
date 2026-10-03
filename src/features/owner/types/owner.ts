@@ -3,8 +3,8 @@ import type {
     AddressResponse,
     PersonRequest,
     PersonResponse,
-    ProfileRequest,
-    ProfileResponse,
+    ContactRequest,
+    ContactResponse,
 } from "../../person/types/person";
 import type { PageRequest } from "../../../lib/apiTypes";
 
@@ -13,18 +13,18 @@ export type {
     AddressResponse,
     PersonRequest,
     PersonResponse,
-    ProfileRequest,
-    ProfileResponse,
+    ContactRequest,
+    ContactResponse,
 } from "../../person/types/person";
 export type { PageResponse } from "../../../lib/apiTypes";
 
 export type PersonCreateRequest = PersonRequest;
-export type ProfileCreateRequest = ProfileRequest;
+export type ContactCreateRequest = ContactRequest;
 export type AddressCreateRequest = AddressRequest;
 
 export interface OwnerCreateRequest {
     person: PersonRequest;
-    profile: ProfileRequest;
+    contact: ContactRequest;
     address: AddressRequest;
 }
 
@@ -33,7 +33,7 @@ export type OwnerUpdateRequest = OwnerCreateRequest;
 export interface OwnerResponse {
     uuid: string;
     person: PersonResponse;
-    profile: ProfileResponse;
+    contact: ContactResponse;
     address: AddressResponse;
 }
 

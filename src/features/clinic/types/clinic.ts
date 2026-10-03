@@ -30,7 +30,7 @@ export interface RoomTypeResponse {
 
 export interface RoomRequest {
     name: string;
-    code: string;
+    roomNumber: string;
     roomTypeUuid: string;
     clinicUuid: string;
     active: boolean;
@@ -39,10 +39,10 @@ export interface RoomRequest {
 export interface RoomResponse {
     uuid: string;
     name: string;
-    code: string;
+    roomNumber: string;
     roomType: RoomTypeResponse;
     active: boolean | null;
-    clinicUuid: string;
+    building: ClinicResponse;
 }
 
 export type ClinicPageRequest = PageRequest & {

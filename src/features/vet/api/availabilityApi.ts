@@ -13,7 +13,7 @@ export async function getVetAvailabilities(
 }
 
 export async function getAvailabilitiesByDate(date: string): Promise<VetAvailabilityResponse[]> {
-    const response = await api.get<VetAvailabilityResponse[]>("/vet-availabilities/date", {
+    const response = await api.get<VetAvailabilityResponse[]>("/vet/availabilities/date", {
         params: { date },
     });
     return response.data;

@@ -1,9 +1,11 @@
-/** Person, profile, and address DTOs embedded in owner and vet APIs. */
+/** Person, contact, and address DTOs embedded in owner and vet APIs. */
 export interface PersonRequest {
     title?: string | null;
     firstName?: string | null;
     lastName?: string | null;
     nationalId?: string | null;
+    birthDate?: string | null;
+    photo?: string | null;
 }
 
 export interface PersonResponse {
@@ -11,20 +13,20 @@ export interface PersonResponse {
     firstName: string | null;
     lastName: string | null;
     nationalId: string | null;
-}
-
-export interface ProfileRequest {
-    email: string;
-    mobileNumber: string;
-    birthDate?: string | null;
-    photo?: string | null;
-}
-
-export interface ProfileResponse {
-    email: string;
-    mobileNumber: string;
     birthDate: string | null;
     photo: string | null;
+}
+
+export interface ContactRequest {
+    email: string;
+    mobileNumber: string;
+    socialMedia?: string | null;
+}
+
+export interface ContactResponse {
+    email: string;
+    mobileNumber: string;
+    socialMedia: string | null;
 }
 
 export interface AddressRequest {

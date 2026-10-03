@@ -1,9 +1,9 @@
 import type { PageRequest } from "../../../lib/apiTypes";
-import type { AddressRequest, AddressResponse, PersonRequest, PersonResponse, ProfileRequest, ProfileResponse } from "../../person/types/person";
+import type { AddressRequest, AddressResponse, ContactRequest, ContactResponse, PersonRequest, PersonResponse } from "../../person/types/person";
 
 export interface VetRequest {
     person: PersonRequest;
-    profile: ProfileRequest;
+    contact: ContactRequest;
     address: AddressRequest;
     clinicUuid?: string | null;
 }
@@ -11,7 +11,7 @@ export interface VetRequest {
 export interface VetResponse {
     uuid: string;
     person: PersonResponse;
-    profile: ProfileResponse;
+    profile: ContactResponse;
     address: AddressResponse;
     clinicUuid: string | null;
 }

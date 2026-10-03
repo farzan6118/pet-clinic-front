@@ -7,9 +7,9 @@ import { formValuesFromRow, nestedPayload, type ResourceField } from "../../../l
 
 const fields: ResourceField[] = [
     { name: "name", label: "Name", required: true },
-    { name: "code", label: "Code", required: true },
+    { name: "roomNumber", label: "Room number", required: true },
     { name: "roomTypeUuid", label: "Room type", type: "select", required: true, options: async () => (await getRoomTypeOptions()).map(({ uuid, title }) => ({ value: uuid, label: title })) },
-    { name: "clinicUuid", label: "Clinic", type: "select", required: true, options: async () => (await getClinicOptions()).map(({ uuid, title }) => ({ value: uuid, label: title })) },
+    { name: "clinicUuid", label: "Building", type: "select", required: true, options: async () => (await getClinicOptions()).map(({ uuid, title }) => ({ value: uuid, label: title })) },
     { name: "active", label: "Active", type: "checkbox" },
 ];
 
@@ -18,9 +18,9 @@ export function RoomsPage() {
         title: "Rooms", queryKey: "rooms", fields,
         columns: [
             { label: "Name", render: (row) => row.name },
-            { label: "Code", render: (row) => row.code },
+            { label: "Room number", render: (row) => row.roomNumber },
             { label: "Room type", render: (row) => row.roomType.name },
-            { label: "Clinic", render: (row) => row.clinicUuid },
+            { label: "Building", render: (row) => row.building.name },
             { label: "Active", render: (row) => row.active ? "Yes" : "No" },
         ],
         load: async () => (await getRooms({ pageNumber: 0, pageSize: 100 })).content,
@@ -28,6 +28,6 @@ export function RoomsPage() {
         update: (uuid, data) => updateRoom(uuid, data as RoomRequest),
         remove: deleteRoom,
         toPayload: (values) => nestedPayload(values, fields),
-        toForm: (row) => formValuesFromRow({ ...row, roomTypeUuid: row.roomType.uuid }, fields),
+        toForm: (row) => formValuesFromRow({ ...row, roomTypeUuid: row.roomType.uuid, clinicUuid: row.building.uuid }, fields),
     }} />;
 }

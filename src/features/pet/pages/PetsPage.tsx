@@ -12,7 +12,7 @@ const fields: ResourceField[] = [
     { name: "sex", label: "Sex", type: "select", required: true, options: ["FEMALE", "MALE", "DIVERSE"].map((value) => ({ value, label: value })) },
     { name: "birthDate", label: "Birth date", type: "date" },
     { name: "speciesUuid", label: "Species", type: "select", required: true, options: async () => (await getSpeciesOptions()).map(({ uuid, title }) => ({ value: uuid, label: title })) },
-    { name: "ownerUuid", label: "Owner", type: "select", required: true, options: async () => (await getOwners({ pageNumber: 0, pageSize: 100 })).content.map((owner) => ({ value: owner.uuid, label: `${owner.person.firstName ?? ""} ${owner.person.lastName ?? ""}`.trim() || owner.profile.email })) },
+    { name: "ownerUuid", label: "Owner", type: "select", required: true, options: async () => (await getOwners({ pageNumber: 0, pageSize: 100 })).content.map((owner) => ({ value: owner.uuid, label: `${owner.person.firstName ?? ""} ${owner.person.lastName ?? ""}`.trim() || owner.contact.email })) },
 ];
 
 export function PetsPage() {
